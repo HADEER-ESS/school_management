@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">School App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_welcome_txt">Welcome back</string>
+    <string name="forget_your_password">Forget your password?</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="your_email_gmail_com_hint">your.email@gmail.com</string>
+    <string name="your_password_hint">Your Password</string>
+    <string name="login_btn_txt">Login</string>
+</resources>

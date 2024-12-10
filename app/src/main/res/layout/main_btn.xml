@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/action_btn"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/main_active_btn_bg"
+    tools:text="@string/login_btn_txt"
+    android:textAllCaps="false"
+    android:paddingVertical="16dp"
+    style="@style/black_16_bold"
+    android:textColor="@color/white"
+    />
