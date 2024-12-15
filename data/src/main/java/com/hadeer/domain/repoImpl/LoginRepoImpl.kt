@@ -19,6 +19,7 @@ class LoginRepoImpl @Inject constructor(
     override suspend fun login(loginBody: LoginBody): NetworkResponse<LoginResponse> {
 //        Check internet connectivity
         if(CheckNetworkConnection.checkConnectivity(context)){
+        println("enter api call $loginBody")
             val response = apiService.login(loginBody)
 
             if(response.isSuccessful){
@@ -30,17 +31,20 @@ class LoginRepoImpl @Inject constructor(
                     response.errorBody()!!.charStream(),
                     ErrorResponseModal::class.java
                 )
+                println("error 400 is ${error.message!!}")
                 return NetworkResponse.ApiError(
                     error.message!!, 400
                 )
             }
             else if(response.code() == 401){
+                println("error 401 is ${response}")
                 return NetworkResponse.ApiError(
                     "Your session is finished please relogin",
                     401
                 )
             }
             else{
+                println("error other wise is ${response }")
                 return NetworkResponse.ApiError("error" , response.code())
             }
         }
