@@ -16,7 +16,7 @@ import javax.inject.Singleton
 object DataModal {
     @Provides
     @Singleton
-    suspend fun provideLogin(apiService : ApiService, @ApplicationContext context:Context) : LoginRepo = LoginRepoImpl(
+     fun provideLogin(apiService : ApiService, @ApplicationContext context:Context) : LoginRepo = LoginRepoImpl(
         apiService,
         context
     )

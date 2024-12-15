@@ -8,7 +8,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import com.hadeer.schoolapp.R
 import com.hadeer.schoolapp.databinding.ActivityAuthBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
     private lateinit var binding : ActivityAuthBinding
     override fun onCreate(savedInstanceState: Bundle?) {
