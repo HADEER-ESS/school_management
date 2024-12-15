@@ -23,13 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/text_field_title_tv"
+        android:background="@drawable/edit_text_action"
+        android:imeOptions="actionDone"
+        app:boxStrokeColor="@color/transparent"
+        app:boxBackgroundMode="none"
         android:layout_marginTop="8dp"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/secure_text_field_input_data_edt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/edit_text_action"
+            android:background="@color/transparent"
             tools:hint="Your Password"
             android:paddingHorizontal="16dp"
             android:inputType="textPassword"

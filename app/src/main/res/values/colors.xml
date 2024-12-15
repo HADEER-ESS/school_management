@@ -4,6 +4,9 @@
     <color name="light_gray">#ABAEBA</color>
     <color name="dark_gray">#696E82</color>
     <color name="dark_blue">#5174E0</color>
+    <color name="error_color">#FF0C15</color>
+    <color name="error_fad_color">#05FF0C15</color>
+    <color name="transparent">#00000000</color>
     <color name="light_blue">#CEDEFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="active_input_bg">#F2F4FF</color>

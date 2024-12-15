@@ -12,4 +12,7 @@
     <string name="login_btn_txt">Login</string>
     <string name="or_txt">Or</string>
     <string name="don_t_have_account_txt">Don’t have account?</string>
+    <string name="role">Role</string>
+    <string name="teacher">Teacher</string>
+    <string name="parent_selection">Parent</string>
 </resources>
