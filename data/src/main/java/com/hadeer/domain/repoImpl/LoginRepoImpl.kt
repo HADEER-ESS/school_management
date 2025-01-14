@@ -43,6 +43,13 @@ class LoginRepoImpl @Inject constructor(
                     401
                 )
             }
+            else if(response.code() == 404){
+                println("error 401 is ${response}")
+                return NetworkResponse.ApiError(
+                    "This account doesn't exist",
+                    404
+                )
+            }
             else{
                 println("error other wise is ${response }")
                 return NetworkResponse.ApiError("error" , response.code())
