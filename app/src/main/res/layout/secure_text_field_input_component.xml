@@ -28,16 +28,17 @@
         app:boxStrokeColor="@color/transparent"
         app:boxBackgroundMode="none"
         android:layout_marginTop="8dp"
+        app:passwordToggleDrawable="@drawable/show_password_action"
+        app:passwordToggleEnabled="true"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/secure_text_field_input_data_edt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"
+            android:layout_height="wrap_content"
+            android:background="@null"
             tools:hint="Your Password"
             android:paddingHorizontal="16dp"
             android:inputType="textPassword"
-            android:drawableEnd="@drawable/close_eye_icv"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
