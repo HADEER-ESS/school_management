@@ -162,6 +162,7 @@ class LoginFragment : Fragment() {
                     }
                     is LoginIntent.Success -> {
                         handleBtnEnability(it.state.isLoginBtnEnabled)
+                        isLoading(it.state.isLoading)
                         if(it.state.isLoginSuccess){
                             Toast.makeText(requireContext(), "Success login!!" , Toast.LENGTH_LONG).show()
                             findNavController().navigate(R.id.action_loginFragment_to_mainActivity)

@@ -23,6 +23,7 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "API_URL", "\"https://dimgrey-llama-992126.hostingersite.com/api/v1/\"")
+            android.buildFeatures.buildConfig = true
         }
         release {
             buildConfigField("String", "API_URL", "\"https://dimgrey-llama-992126.hostingersite.com/api/v1/\"")

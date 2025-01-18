@@ -4,21 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 data class ErrorResponse(
 
+	@field:SerializedName("data")
+	val data: Any? = null,
+
+	@field:SerializedName("error")
+	val error: Boolean? = null,
+
 	@field:SerializedName("message")
-	val message: String? = null,
-
-	@field:SerializedName("errors")
-	val errors: Errors? = null
-)
-
-data class Errors(
-
-	@field:SerializedName("email")
-	val email: List<String?>? = null,
-
-	@field:SerializedName("password")
-	val password: List<String?>? = null,
-
-	@field:SerializedName("role")
-	val role : List<String?>? = null
+	val message: String? = null
 )
