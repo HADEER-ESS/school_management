@@ -1,5 +1,6 @@
 package com.hadeer.schoolapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,5 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun handleNavigation() {
-
     }
 }

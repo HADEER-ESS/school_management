@@ -21,8 +21,9 @@ class LoginRepoImpl @Inject constructor(
         if(CheckNetworkConnection.checkConnectivity(context)){
         println("enter api call $loginBody")
             val response = apiService.login(loginBody)
-
+            println("response is ${response}")
             if(response.isSuccessful){
+                println("response is ${response.body()}")
                 return NetworkResponse.Success(response.body()!!)
             }
             else if(response.code() == 400){
@@ -41,6 +42,13 @@ class LoginRepoImpl @Inject constructor(
                 return NetworkResponse.ApiError(
                     "Your session is finished please relogin",
                     401
+                )
+            }
+            else if(response.code() == 404){
+                println("error 404 is ${response}")
+                return NetworkResponse.ApiError(
+                    "This account doesn't exist",
+                    404
                 )
             }
             else{

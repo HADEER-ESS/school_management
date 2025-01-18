@@ -22,6 +22,7 @@ class LoginViewModal @Inject constructor(
 
     fun loginUser(email : String, password : String, role : String){
         viewModelScope.launch {
+            println("income data is $email $password $role")
             initState = initState.copy(
                 isLoading = true,
                 isLoginBtnEnabled = false
@@ -29,7 +30,7 @@ class LoginViewModal @Inject constructor(
             _loginIntent.emit(
                 LoginIntent.Ideal(initState)
             )
-            if(email.isEmpty() || !checkGmailRegexValidation(email)){
+            if(!checkGmailRegexValidation(email)){
                 initState = initState.copy(
                     isLoginSuccess = false,
                     isLoginBtnEnabled = false,
@@ -39,7 +40,7 @@ class LoginViewModal @Inject constructor(
                     LoginIntent.InputFailed(initState)
                 )
             }
-            if(password.isEmpty() || password.length < 6){
+            if(password.length < 6){
                 initState = initState.copy(
                     isLoading = false,
                     isLoginBtnEnabled = false,
@@ -47,25 +48,6 @@ class LoginViewModal @Inject constructor(
                 )
                 _loginIntent.emit(
                     LoginIntent.InputFailed(initState)
-                )
-            }
-            if(role.isNullOrEmpty()){
-                initState = initState.copy(
-                    isLoading = false,
-                    isLoginBtnEnabled = false,
-                    roleErrorString = "Please select a role"
-                )
-                _loginIntent.emit(
-                    LoginIntent.InputFailed(initState)
-                )
-            }
-            if(role.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
-                initState = initState.copy(
-                    isLoading = false,
-                    isLoginBtnEnabled = true
-                )
-                _loginIntent.emit(
-                    LoginIntent.Success(initState)
                 )
             }
             else{

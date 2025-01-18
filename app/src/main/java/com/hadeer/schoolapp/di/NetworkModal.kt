@@ -2,7 +2,10 @@ package com.hadeer.schoolapp.di
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.hadeer.domain.ApiService
 import com.hadeer.domain.TokenProvider
 import com.hadeer.schoolapp.BuildConfig
@@ -26,6 +29,14 @@ object NetworkModal {
     @Singleton
     fun provideTokenProvider() : TokenProvider{
         return TokenProvider()
+    }
+
+    @Singleton
+    @Provides
+    fun provideGson():Gson{
+        return GsonBuilder()
+            .setLenient()
+            .create()
     }
 
     @Provides
@@ -56,10 +67,11 @@ object NetworkModal {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient : OkHttpClient):Retrofit{
+    fun provideRetrofit(okHttpClient : OkHttpClient, gson:Gson):Retrofit{
+        Log.d("BuildConfig", "API_URL: ${BuildConfig.API_URL}")
         return Retrofit.Builder()
             .baseUrl(BuildConfig.API_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
     }

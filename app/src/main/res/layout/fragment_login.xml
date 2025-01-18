@@ -33,22 +33,22 @@
         app:layout_constraintTop_toBottomOf="@id/user_email_text_field_include"
         layout="@layout/secure_text_field_input_component"
         />
-    <TextView
-        android:id="@+id/forget_password_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="4dp"
-        android:textAlignment="viewEnd"
-        app:layout_constraintTop_toBottomOf="@id/user_password_text_field_include"
-        android:text="@string/forget_your_password"
-        style="@style/darkBlue_15_regular"
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/forget_password_tv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="16dp"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:textAlignment="viewEnd"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/user_password_text_field_include"-->
+<!--        android:text="@string/forget_your_password"-->
+<!--        style="@style/darkBlue_15_regular"-->
+<!--        />-->
     <include
         android:id="@+id/radio_selection_role_include"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/forget_password_tv"
+        app:layout_constraintTop_toBottomOf="@id/user_password_text_field_include"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
@@ -63,16 +63,16 @@
         app:layout_constraintTop_toBottomOf="@id/radio_selection_role_include"
         layout="@layout/main_btn"
         />
-    <TextView
-        android:id="@+id/create_account_option_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/login_action_btn_include"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
-        style="@style/darkBlue_19_bold"
-        android:text="@string/don_t_have_account_txt"
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/create_account_option_tv"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/login_action_btn_include"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:textAlignment="center"-->
+<!--        style="@style/darkBlue_19_bold"-->
+<!--        android:text="@string/don_t_have_account_txt"-->
+<!--        />-->
 
     <ProgressBar
         android:id="@+id/progress_bar_ly"
