@@ -15,4 +15,5 @@
     <string name="role">Role</string>
     <string name="teacher">Teacher</string>
     <string name="parent_selection">Parent</string>
+    <string name="let_s_sign_in_txt">Let’s sign in.</string>
 </resources>
