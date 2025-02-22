@@ -15,4 +15,8 @@
     <string name="role">Role</string>
     <string name="teacher">Teacher</string>
     <string name="parent_selection">Parent</string>
+    <string name="home_title">Home</string>
+    <string name="announcement_title">Announcement</string>
+    <string name="chat_title">Chat</string>
+    <string name="profile_item">Profile</string>
 </resources>
