@@ -125,7 +125,7 @@ class LoginFragment : Fragment() {
             binding.loginActionBtnInclude.actionBtn.setTextColor(resources.getColor(R.color.white))
         }else{
             binding.loginActionBtnInclude.actionBtn.background = resources.getDrawable(R.drawable.main_inactive_btn_bg)
-            binding.loginActionBtnInclude.actionBtn.setTextColor(resources.getColor(R.color.dark_blue))
+            binding.loginActionBtnInclude.actionBtn.setTextColor(resources.getColor(R.color.primary_color))
         }
     }
 
