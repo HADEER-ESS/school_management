@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:gravity="center_vertical"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/primary_color"
+        app:titleTextColor="@color/white"
+        app:navigationIconTint="@color/white"
+        app:title="Hello"
+        >
+        <ImageView
+            android:id="@+id/top_bar_notification_img"
+            android:layout_width="18dp"
+            android:layout_height="22dp"
+            android:src="@drawable/notification_icv"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="20dp"
+            />
+    </com.google.android.material.appbar.MaterialToolbar>
+</com.google.android.material.appbar.AppBarLayout>

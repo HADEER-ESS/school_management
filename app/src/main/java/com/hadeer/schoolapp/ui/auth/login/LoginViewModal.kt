@@ -1,11 +1,14 @@
 package com.hadeer.schoolapp.ui.auth.login
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hadeer.domain.entities.NetworkResponse
 import com.hadeer.domain.entities.login.LoginBody
 import com.hadeer.domain.useCase.LoginUseCase
+import com.hadeer.domain.utils.SecurSharedPrefs
+import com.hadeer.domain.utils.SharedPrefs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -15,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModal @Inject constructor(
     private val loginUseCase : LoginUseCase,
+    private val context: Application,
 ): ViewModel() {
     private var initState = LoginState()
     private val _loginIntent = MutableSharedFlow<LoginIntent>()
@@ -61,6 +65,10 @@ class LoginViewModal @Inject constructor(
             println("the response is $response" )
                 when(response){
                     is NetworkResponse.Success -> {
+//                        Store Access-Token in secure shared preference
+                        saveIncomeSecureSuccessData(response.body.data?.accessToken)
+                        saveIncomeStringSuccessData("user_name", response.body.data?.name!!)
+                        saveIncomeIntSuccessData("user_id", response.body.data?.id!!)
 
                         initState = initState.copy(
                             isLoading = false,
@@ -106,5 +114,21 @@ class LoginViewModal @Inject constructor(
     private fun checkGmailRegexValidation(email : String):Boolean{
         val regex = Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")
         return regex.matches(email)
+    }
+
+    private fun saveIncomeSecureSuccessData(value : String?){
+        SecurSharedPrefs
+            .getSharedPreferences(context)
+            .edit()
+            .putString("access_token", value)
+            .apply()
+    }
+
+    private fun saveIncomeStringSuccessData(key :String, value : String?){
+        SharedPrefs.saveStringData(context, key,value)
+    }
+
+    private fun saveIncomeIntSuccessData(key: String, value : Int?){
+        SharedPrefs.saveIntData(context, key, value)
     }
 }

@@ -82,7 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:indeterminateTint="@color/dark_blue"
+        android:indeterminateTint="@color/primary_color"
         style="?android:attr/progressBarStyleLarge"
         android:visibility="gone"
         />
