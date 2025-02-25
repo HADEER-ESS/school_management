@@ -1,10 +1,12 @@
 package com.hadeer.schoolapp.ui.app.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.hadeer.schoolapp.R
 import com.hadeer.schoolapp.databinding.FragmentHomeMainBinding
 
 class HomeMainFragment : Fragment() {
@@ -24,5 +26,13 @@ class HomeMainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        linkTitleViewMoreFieldData()
+    }
+
+    private fun linkTitleViewMoreFieldData() {
+        binding.eventTitleViewmoreInclude.fieldTitleTv.text = getString(R.string.events_title)
+        binding.announcementTitleViewmoreInclude.fieldTitleTv.text = getString(R.string.announcement_title)
+        binding.categoryTitleViewmoreInclude.fieldTitleTv.text = getString(R.string.categories_title)
+        binding.categoryTitleViewmoreInclude.fieldViewmoreTv.visibility = View.GONE
     }
 }
