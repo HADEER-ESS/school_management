@@ -19,4 +19,7 @@
     <string name="announcement_title">Announcement</string>
     <string name="chat_title">Chat</string>
     <string name="profile_item">Profile</string>
+    <string name="view_all_txt">view all</string>
+    <string name="events_title">Events</string>
+    <string name="categories_title">Categories</string>
 </resources>
