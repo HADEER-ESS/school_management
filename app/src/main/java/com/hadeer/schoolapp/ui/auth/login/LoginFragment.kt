@@ -10,9 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.hadeer.domain.utils.SecurSharedPrefs
 import com.hadeer.schoolapp.R
 import com.hadeer.schoolapp.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +50,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         handleViewContent()
         handleListener()
+        handleNavigationToAppStack()
         handleEditTextChangeListener()
         handleBtnEnability(email!= null && password!= null && selectedRole != null)
         binding.loginActionBtnInclude.actionBtn.setOnClickListener { loginAction() }
@@ -199,5 +202,12 @@ class LoginFragment : Fragment() {
 
     private fun handleFailedLogin(error : String){
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun handleNavigationToAppStack() {
+        val token = SecurSharedPrefs.getSharedPreferences(requireContext()).getString("access_token", null)
+        if(token != null){
+            findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+        }
     }
 }
