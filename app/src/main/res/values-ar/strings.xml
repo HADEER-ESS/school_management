@@ -22,4 +22,11 @@
     <string name="view_all_txt">view all</string>
     <string name="events_title">Events</string>
     <string name="categories_title">Categories</string>
+    <string name="attendance_category_name">Attendance</string>
+    <string name="quiz_category_name">Quiz</string>
+    <string name="assignment_category_name">Assignment</string>
+    <string name="classSchedual_category_name">Class Schedule</string>
+    <string name="results_category_name">Results</string>
+    <string name="schoolHoliday_category_name">School Holiday</string>
+    <string name="examSchedual_category_name">Exam Schedule</string>
 </resources>
