@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hadeer.schoolapp.R
 import com.hadeer.schoolapp.databinding.FragmentHomeMainBinding
+import com.hadeer.schoolapp.ui.app.home.category.CategoryAdaptor
+import com.hadeer.schoolapp.ui.app.home.category.CategoryData
 
 class HomeMainFragment : Fragment() {
     private lateinit var binding: FragmentHomeMainBinding
@@ -27,6 +31,13 @@ class HomeMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         linkTitleViewMoreFieldData()
+        linkCategoryRecyclerView()
+    }
+
+    private fun linkCategoryRecyclerView() {
+        binding.categoryRecyclerView.layoutManager = GridLayoutManager(context, 3)
+        val adaptor = CategoryAdaptor(CategoryData.DATA)
+        binding.categoryRecyclerView.adapter = adaptor
     }
 
     private fun linkTitleViewMoreFieldData() {
