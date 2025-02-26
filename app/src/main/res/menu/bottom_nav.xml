@@ -10,7 +10,6 @@
         android:id="@+id/announcementFragment"
         android:title="@string/announcement_title"
         android:icon="@drawable/announcement_icv"
-        app:showAsAction="always"
         />
     <item
         android:id="@+id/chatFragment"

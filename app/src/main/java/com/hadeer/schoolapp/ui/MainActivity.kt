@@ -2,6 +2,7 @@ package com.hadeer.schoolapp.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -35,6 +36,20 @@ class MainActivity : AppCompatActivity() {
         ) as? NavHostFragment
 
         val navController = navHostFragment?.navController
+        binding.bottomAppBarNav.setupWithNavController(navController!!)
+
+        navController?.addOnDestinationChangedListener{_,destination,_ ->
+            when(destination.id){
+                R.id.homeMainFragment -> {
+                    binding.topBarInclude.topAppBar.title = "Welcome $userName,"
+                    binding.topBarInclude.topBarNotificationImg.visibility = View.VISIBLE
+                }
+                else ->{
+                    binding.topBarInclude.topBarNotificationImg.visibility = View.GONE
+                    binding.topBarInclude.topAppBar.title = destination.label
+                }
+            }
+        }
 
     }
 
