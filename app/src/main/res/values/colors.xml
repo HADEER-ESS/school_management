@@ -4,7 +4,7 @@
     <color name="secondary_color">#9E9898</color>
     <color name="background_secondry_color">#F5F6FC</color>
     <color name="primary_color">#3179A6</color>
-    <color name="background_primary">#3179A64D</color>
+    <color name="background_primary">#0D3179A6</color>
     <color name="dark_red">#C61F22</color>
     <color name="background_red">#FE9D9D</color>
     <color name="transparent">#00000000</color>
