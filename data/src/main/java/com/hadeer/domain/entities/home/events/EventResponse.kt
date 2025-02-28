@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class EventResponse(
 
 	@field:SerializedName("data")
-	val data: List<DataItem?>? = null,
+	val data: List<EventsDataItem?>? = null,
 
 	@field:SerializedName("meta")
 	val meta: Meta? = null,
@@ -71,7 +71,7 @@ data class Meta(
 	val currentPage: Int? = null
 )
 
-data class DataItem(
+data class EventsDataItem(
 
 	@field:SerializedName("end_date")
 	val endDate: String? = null,
