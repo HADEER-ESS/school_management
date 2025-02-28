@@ -75,6 +75,10 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
 
+//    Glide
+    implementation(libs.glide)
+    kapt(libs.compiler)
+
 //    Link
     implementation(project(":data"))
 }
