@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.hadeer.domain.AuthorizationToken
 import com.hadeer.domain.TokenProvider
+import com.hadeer.domain.utils.SecurSharedPrefs
 import com.hadeer.schoolapp.ui.AuthActivity
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -36,6 +37,7 @@ class TokenExpiredInterceptor @Inject constructor(
                 .build()
             val newResponse = chain.proceed(newRequest)
             if(newResponse.code == 401){ //unauthorized
+//                SecurSharedPrefs.getSharedPreferences(context).edit().clear().apply()
                 tokenProvider.setToken("")
                 handleUnAuthorizedToken()
             }
