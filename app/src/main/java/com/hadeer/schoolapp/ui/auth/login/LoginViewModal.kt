@@ -2,8 +2,11 @@ package com.hadeer.schoolapp.ui.auth.login
 
 import android.app.Application
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hadeer.domain.TokenProvider
 import com.hadeer.domain.entities.NetworkResponse
 import com.hadeer.domain.entities.login.LoginBody
 import com.hadeer.domain.useCase.LoginUseCase
@@ -15,10 +18,12 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@RequiresApi(Build.VERSION_CODES.M)
 @HiltViewModel
 class LoginViewModal @Inject constructor(
     private val loginUseCase : LoginUseCase,
     private val context: Application,
+    private val tokenProvider: TokenProvider
 ): ViewModel() {
     private var initState = LoginState()
     private val _loginIntent = MutableSharedFlow<LoginIntent>()
@@ -100,7 +105,7 @@ class LoginViewModal @Inject constructor(
                     is NetworkResponse.UnknowError -> {
                         initState = initState.copy(
                             isLoading = false,
-                            loginApiError = "Something wrong happen, try again later"
+                            loginApiError = "You internet is not stable, try again later"
                         )
                         _loginIntent.emit(
                             LoginIntent.Failed(initState)
@@ -117,11 +122,7 @@ class LoginViewModal @Inject constructor(
     }
 
     private fun saveIncomeSecureSuccessData(value : String?){
-        SecurSharedPrefs
-            .getSharedPreferences(context)
-            .edit()
-            .putString("access_token", value)
-            .apply()
+        tokenProvider.setToken(value!!)
     }
 
     private fun saveIncomeStringSuccessData(key :String, value : String?){
