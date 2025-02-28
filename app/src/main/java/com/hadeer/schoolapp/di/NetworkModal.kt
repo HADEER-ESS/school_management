@@ -27,8 +27,10 @@ import javax.inject.Singleton
 object NetworkModal {
     @Provides
     @Singleton
-    fun provideTokenProvider() : TokenProvider{
-        return TokenProvider()
+    fun provideTokenProvider(
+        @ApplicationContext context: Context,
+    ) : TokenProvider{
+        return TokenProvider(context)
     }
 
     @Singleton
@@ -51,17 +53,23 @@ object NetworkModal {
     @Singleton
     fun provideTokenExpiration(
         @ApplicationContext context: Context,
-        tokenProvider: TokenProvider
+        tokenProvider: TokenProvider,
     ) : TokenExpiredInterceptor {
         return TokenExpiredInterceptor(context, tokenProvider)
     }
 
     @Provides
     @Singleton
-    fun provideOkHttp() :OkHttpClient {
+    fun provideOkHttp(
+        @ApplicationContext context: Context,
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        tokenExpiredInterceptor: TokenExpiredInterceptor
+    ) :OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
+            .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(tokenExpiredInterceptor)
             .build()
     }
 

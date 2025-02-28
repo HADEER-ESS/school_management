@@ -63,4 +63,17 @@
         tools:itemCount="7"
         />
 
+    <ProgressBar
+        android:id="@+id/progress_bar_ly"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminateTint="@color/primary_color"
+        style="?android:attr/progressBarStyleLarge"
+        android:visibility="gone"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

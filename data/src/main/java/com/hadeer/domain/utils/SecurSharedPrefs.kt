@@ -2,9 +2,11 @@ package com.hadeer.domain.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-
+@RequiresApi(Build.VERSION_CODES.M)
 object SecurSharedPrefs {
     private const val PREFS_FILE_NAME = "secure_prefs"
 
