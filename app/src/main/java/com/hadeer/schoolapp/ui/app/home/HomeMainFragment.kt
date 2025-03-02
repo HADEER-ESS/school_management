@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.hadeer.domain.entities.home.events.EventResponseModal
 import com.hadeer.schoolapp.R
 import com.hadeer.schoolapp.databinding.FragmentHomeMainBinding
 import com.hadeer.schoolapp.ui.app.home.category.CategoryAdaptor
@@ -44,6 +47,13 @@ class HomeMainFragment : Fragment() {
         linkTitleViewMoreFieldData()
         linkCategoryRecyclerView()
         screenListener()
+        viewMoreCategoryHandle()
+    }
+
+    private fun viewMoreCategoryHandle() {
+        binding.eventTitleViewmoreInclude.fieldViewmoreTv.setOnClickListener{
+            findNavController().navigate(R.id.action_homeMainFragment_to_eventFragment)
+        }
     }
 
     private fun linkCategoryRecyclerView() {
@@ -70,8 +80,7 @@ class HomeMainFragment : Fragment() {
                     }
                     is HomeIntent.Event_Success -> {
                         isLoading(it.state.isLoading)
-                        binding.eventRecyclerView.adapter = EventAdaptor(it.state.eventsData)
-
+                        binding.eventRecyclerView.adapter = EventAdaptor(it.state.eventsData,"section")
                     }
                     is HomeIntent.Event_Failed -> {
                         isLoading(it.state.isLoading)
