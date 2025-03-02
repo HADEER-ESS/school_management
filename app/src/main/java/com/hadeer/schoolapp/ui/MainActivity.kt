@@ -1,19 +1,11 @@
 package com.hadeer.schoolapp.ui
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.hadeer.domain.TokenProvider
-import com.hadeer.domain.utils.SecurSharedPrefs
 import com.hadeer.domain.utils.SharedPrefs
 import com.hadeer.schoolapp.R
 import com.hadeer.schoolapp.databinding.ActivityMainBinding
@@ -44,15 +36,22 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment?.navController
         binding.bottomAppBarNav.setupWithNavController(navController!!)
 
+        binding.topBarInclude.topBarBackImg.setOnClickListener {
+            navController.navigateUp()
+        }
+
         navController.addOnDestinationChangedListener{_,destination,_ ->
             when(destination.id){
                 R.id.homeMainFragment -> {
-                    binding.topBarInclude.topAppBar.title = "Welcome $userName,"
+                    binding.topBarInclude.toolbarTitle.text =
+                        getString(R.string.welcome_txt, userName)
                     binding.topBarInclude.topBarNotificationImg.visibility = View.VISIBLE
+                    binding.topBarInclude.topBarBackImg.visibility = View.GONE
                 }
                 else ->{
                     binding.topBarInclude.topBarNotificationImg.visibility = View.GONE
-                    binding.topBarInclude.topAppBar.title = destination.label
+                    binding.topBarInclude.topBarBackImg.visibility = View.VISIBLE
+                    binding.topBarInclude.toolbarTitle.text = destination.label
                 }
             }
         }
