@@ -8,7 +8,10 @@ import com.hadeer.domain.useCase.HomeUseCase
 import com.hadeer.schoolapp.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,10 +22,17 @@ class HomePageViewModel @Inject constructor(
 ): ViewModel(){
     var currentState = HomeState()
     private val _homeIntent = MutableSharedFlow<HomeIntent>()
-    var homeIntent = _homeIntent.asSharedFlow()
-    init {
+    var homeIntent = _homeIntent
+        .asSharedFlow()
+        .onStart {
         getHomeEventsData()
-    }
+        }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000L),
+            false
+        )
+
     fun getHomeEventsData(){
         println("response ........")
         viewModelScope.launch {

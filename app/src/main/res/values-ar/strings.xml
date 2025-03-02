@@ -31,4 +31,5 @@
     <string name="results_category_name">Results</string>
     <string name="schoolHoliday_category_name">School Holiday</string>
     <string name="examSchedual_category_name">Exam Schedule</string>
+    <string name="welcome_txt">Welcome %1$s,</string>
 </resources>

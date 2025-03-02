@@ -35,6 +35,6 @@
     <fragment
         android:id="@+id/eventFragment"
         android:name="com.hadeer.schoolapp.ui.app.home.EventFragment"
-        android:label=""
+        android:label="@string/events_title"
         tools:layout="@layout/fragment_event" />
 </navigation>

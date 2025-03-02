@@ -11,7 +11,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class EventAdaptor(
-    val data: List<EventResponseModal>
+    val data: List<EventResponseModal>,
+    val from : String?
 ) : RecyclerView.Adapter<EventAdaptor.EventViewModel>() {
     class EventViewModel(
         binding: EventCardItemBinding
@@ -35,6 +36,12 @@ class EventAdaptor(
 
     override fun onBindViewHolder(holder: EventViewModel, position: Int) {
         val render_item = data[position]
+        if(from == "screen"){
+            val layoutParam = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParam.bottomMargin = 20
+            layoutParam.topMargin = if(position == 0) 20 else 0
+            holder.itemView.layoutParams = layoutParam
+        }
         if(render_item.image.isNullOrEmpty()){
             holder.event_img.visibility = View.GONE
         }
