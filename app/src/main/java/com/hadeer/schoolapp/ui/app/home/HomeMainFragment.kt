@@ -1,10 +1,13 @@
 package com.hadeer.schoolapp.ui.app.home
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,6 +16,7 @@ import com.google.gson.Gson
 import com.hadeer.domain.entities.home.events.EventResponseModal
 import com.hadeer.schoolapp.R
 import com.hadeer.schoolapp.databinding.FragmentHomeMainBinding
+import com.hadeer.schoolapp.ui.app.home.announcements.AnnouncementAdaptor
 import com.hadeer.schoolapp.ui.app.home.category.CategoryAdaptor
 import com.hadeer.schoolapp.ui.app.home.category.CategoryData
 import com.hadeer.schoolapp.ui.app.home.events.EventAdaptor
@@ -23,7 +27,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
+@RequiresApi(Build.VERSION_CODES.O)
 @AndroidEntryPoint
 class HomeMainFragment : Fragment() {
     private lateinit var binding: FragmentHomeMainBinding
@@ -76,16 +80,29 @@ class HomeMainFragment : Fragment() {
             viewModel.homeIntent.collect{
                 when(it){
                     is HomeIntent.Idleal ->{
-                        isLoading(it.state.isLoading)
+                        isLoading(it.state.events_isLoading)
                     }
                     is HomeIntent.Event_Success -> {
-                        isLoading(it.state.isLoading)
+                        isLoading(it.state.events_isLoading)
                         binding.eventRecyclerView.adapter = EventAdaptor(it.state.eventsData,"section")
                     }
                     is HomeIntent.Event_Failed -> {
-                        isLoading(it.state.isLoading)
+                        isLoading(it.state.events_isLoading)
+                        Toast.makeText(requireContext(),it.state.events_error_message, Toast.LENGTH_SHORT).show()
                     }
-                    else -> {}
+                    is HomeIntent.Idleal -> {
+                        println("announcement Idle.000")
+                        isLoading(it.state.announcement_isLoading)
+                    }
+                    is HomeIntent.Announcement_Success -> {
+                        isLoading(it.state.announcement_isLoading)
+                        println("the announcement data is from state ${it.state.announcementData}")
+                        binding.announcementRecyclerView.adapter = AnnouncementAdaptor(it.state.announcementData)
+                    }
+                    is HomeIntent.Announcement_Failed -> {
+                        isLoading(it.state.announcement_isLoading)
+                        Toast.makeText(requireContext(),it.state.announcement_error_message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -98,5 +115,10 @@ class HomeMainFragment : Fragment() {
         }else{
             binding.progressBarLy.visibility = View.GONE
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchHomeData()
     }
 }

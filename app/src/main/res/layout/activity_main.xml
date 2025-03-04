@@ -11,6 +11,7 @@
         android:id="@+id/topBar_include"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         layout="@layout/tool_bar_comp"
         />
     <include
@@ -22,9 +23,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        app:layout_anchorGravity="bottom"
         android:clipToPadding="false"
         android:padding="0dp"
         android:paddingVertical="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
         app:paddingBottomSystemWindowInsets="false"
         >
         <com.google.android.material.bottomnavigation.BottomNavigationView

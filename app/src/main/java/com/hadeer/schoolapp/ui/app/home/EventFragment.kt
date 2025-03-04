@@ -49,16 +49,16 @@ class EventFragment : Fragment() {
             viewModel.homeIntent.collect{
                 when(it){
                     is HomeIntent.Idleal -> {
-                        isLoading(it.state.isLoading)
+                        isLoading(it.state.events_isLoading)
                     }
                     is HomeIntent.Event_Success->{
-                        isLoading(it.state.isLoading)
+                        isLoading(it.state.events_isLoading)
                         println("success now events is ${it.state.eventsData}")
                         val adaptor = EventAdaptor(it.state.eventsData, "screen")
                         binding.eventsMainRcyv.adapter = adaptor
                     }
                     is HomeIntent.Event_Failed -> {
-                        isLoading(it.state.isLoading)
+                        isLoading(it.state.events_isLoading)
                         Toast.makeText(requireContext(), it.state.events_error_message, Toast.LENGTH_SHORT).show()
                     }
                     else -> {}
