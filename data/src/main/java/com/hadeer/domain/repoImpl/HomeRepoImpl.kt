@@ -6,6 +6,8 @@ import com.hadeer.domain.ApiService
 import com.hadeer.domain.CheckNetworkConnection
 import com.hadeer.domain.entities.NetworkResponse
 import com.hadeer.domain.entities.errors.ErrorResponseModal
+import com.hadeer.domain.entities.home.announcements.AnnouncementResponseModel
+import com.hadeer.domain.entities.home.announcements.getAnnouncement
 import com.hadeer.domain.entities.home.events.EventResponseModal
 import com.hadeer.domain.entities.home.events.toGetItemData
 import com.hadeer.domain.repo.HomeRepo
@@ -26,6 +28,56 @@ class HomeRepoImpl @Inject constructor(
                     response.body()?.data?.mapNotNull {
                         it?.toGetItemData()
                     }?: emptyList()
+                )
+            }
+            else if(response.code() == 400){
+                val gson = Gson()
+                val error = gson.fromJson(
+                    response.errorBody()!!.charStream(),
+                    ErrorResponseModal::class.java
+                )
+                println("error 400 is ${error.message!!}")
+                return NetworkResponse.ApiError(
+                    error.message, 400
+                )
+            }
+            else if(response.code() == 401){
+                println("error 401 is ${response}")
+                return NetworkResponse.ApiError(
+                    "Your session is finished please relogin",
+                    401
+                )
+            }
+            else if(response.code() == 404){
+                println("error 404 is ${response}")
+                return NetworkResponse.ApiError(
+                    "This account doesn't exist",
+                    404
+                )
+            }
+            else{
+                println("error other wise is ${response }")
+                return NetworkResponse.ApiError("error" , response.code())
+            }
+        }
+        else{
+            return NetworkResponse.NetworkError(
+                IOException(
+                    "No internet connection, please check your connectivity"
+                )
+            )
+        }
+    }
+
+    override suspend fun getAnnouncement(): NetworkResponse<List<AnnouncementResponseModel>> {
+        if(CheckNetworkConnection.checkConnectivity(context)){
+            val response = apiService.getAnnouncements()
+            if(response.isSuccessful){
+                println("get announcement data isss ${response.body()?.data?.items?.data}")
+                return NetworkResponse.Success(
+                    response.body()?.data?.items?.data!!.mapNotNull {
+                        it?.getAnnouncement()
+                    }
                 )
             }
             else if(response.code() == 400){
