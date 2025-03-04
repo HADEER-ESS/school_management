@@ -1,5 +1,6 @@
 package com.hadeer.domain
 
+import com.hadeer.domain.entities.home.announcements.AnnouncementResponse
 import com.hadeer.domain.entities.home.events.EventResponse
 import com.hadeer.domain.entities.login.LoginBody
 import com.hadeer.domain.entities.login.LoginResponse
@@ -15,4 +16,8 @@ interface ApiService {
     @AuthorizationToken
     @GET("events")
     suspend fun getEvents():Response<EventResponse>
+
+    @AuthorizationToken
+    @GET("announcements/search")
+    suspend fun getAnnouncements():Response<AnnouncementResponse>
 }
