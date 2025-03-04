@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,6 +22,7 @@
         tools:listitem="@layout/event_card_item"
         android:orientation="horizontal"
         tools:itemCount="4"
+        android:nestedScrollingEnabled="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
     <include
@@ -40,6 +42,7 @@
         tools:listitem="@layout/announcement_card_item"
         android:orientation="horizontal"
         tools:itemCount="4"
+        android:nestedScrollingEnabled="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
@@ -60,6 +63,8 @@
         tools:listitem="@layout/category_card_item"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintVertical_bias="1"
         tools:itemCount="7"
         />
 

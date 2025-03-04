@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
+    android:layout_marginBottom="?attr/actionBarSize"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
     tools:context=".ui.MainActivity"
