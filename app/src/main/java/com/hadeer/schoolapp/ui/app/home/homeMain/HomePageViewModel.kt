@@ -24,20 +24,22 @@ class HomePageViewModel @Inject constructor(
     private val _homeIntent = MutableSharedFlow<HomeIntent>()
     var homeIntent = _homeIntent
         .asSharedFlow()
-        .onStart {
-        getHomeEventsData()
+
+    init {
+        fetchHomeData()
+    }
+
+    fun fetchHomeData() {
+        viewModelScope.launch {
+            getAnnouncementData()
+            getHomeEventsData()
         }
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000L),
-            false
-        )
+    }
 
     fun getHomeEventsData(){
-        println("response ........")
         viewModelScope.launch {
             currentState = currentState.copy(
-                isLoading = true
+                events_isLoading = true
             )
             _homeIntent.emit(
                 HomeIntent.Idleal(currentState)
@@ -46,7 +48,7 @@ class HomePageViewModel @Inject constructor(
             when(response){
                 is NetworkResponse.Success -> {
                     currentState = currentState.copy(
-                        isLoading = false,
+                        events_isLoading = false,
                         eventsData = response.body,
                         events_success = true
                     )
@@ -56,7 +58,7 @@ class HomePageViewModel @Inject constructor(
                 }
                 is NetworkResponse.ApiError -> {
                     currentState = currentState.copy(
-                        isLoading = false,
+                        events_isLoading = false,
                         events_error_message = response.body,
                         events_success = false
                     )
@@ -66,7 +68,7 @@ class HomePageViewModel @Inject constructor(
                 }
                 is NetworkResponse.NetworkError -> {
                     currentState = currentState.copy(
-                        isLoading = false,
+                        events_isLoading = false,
                         events_error_message = context.getString(R.string.network_error),
                         events_success = false
                     )
@@ -76,7 +78,7 @@ class HomePageViewModel @Inject constructor(
                 }
                 is NetworkResponse.UnknowError -> {
                     currentState = currentState.copy(
-                        isLoading = false,
+                        events_isLoading = false,
                         events_error_message = context.getString(R.string.unknow_error),
                         events_success = false
                     )
@@ -85,6 +87,62 @@ class HomePageViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    fun getAnnouncementData(){
+        viewModelScope.launch {
+            currentState = currentState.copy(
+                announcement_isLoading = true
+            )
+            _homeIntent.emit(
+                HomeIntent.Idleal(currentState)
+            )
+            val response = homeUseCase.getAnnouncementData()
+
+            when(response){
+                is NetworkResponse.Success -> {
+                    currentState = currentState.copy(
+                        announcement_isLoading = false,
+                        announcementData = response.body,
+                        announcement_success = true
+                    )
+                    _homeIntent.emit(
+                        HomeIntent.Announcement_Success(currentState)
+                    )
+                }
+                is NetworkResponse.ApiError -> {
+                    currentState = currentState.copy(
+                        announcement_isLoading = false,
+                        announcement_error_message = response.body,
+                        announcement_success = false
+                    )
+                    _homeIntent.emit(
+                        HomeIntent.Announcement_Failed(currentState)
+                    )
+                }
+                is NetworkResponse.NetworkError -> {
+                    currentState = currentState.copy(
+                        announcement_isLoading = false,
+                        announcement_error_message = context.getString(R.string.network_error),
+                        announcement_success = false
+                    )
+                    _homeIntent.emit(
+                        HomeIntent.Announcement_Failed(currentState)
+                    )
+                }
+                is NetworkResponse.UnknowError -> {
+                    currentState = currentState.copy(
+                        announcement_isLoading = false,
+                        announcement_error_message = context.getString(R.string.unknow_error),
+                        announcement_success = false
+                    )
+                    _homeIntent.emit(
+                        HomeIntent.Announcement_Failed(currentState)
+                    )
+                }
+            }
+
         }
     }
 }
